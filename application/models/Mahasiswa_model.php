@@ -24,4 +24,10 @@ class Mahasiswa_model extends CI_Model
     $this->db->insert('mahasiswa', $data);
     return $this->db->affected_rows(); //memberikan return 1 bila data terhapus dan 0 bila gagal 
   }
+
+  public function updateMahasiswa($data, $id)
+  {
+    $this->db->update('mahasiswa', $data, ['id' => $id]);
+    return $this->db->affected_rows(); //memberikan return 1 bila data terhapus dan 0 bila gagal 
+  }
 }

@@ -108,4 +108,30 @@ class Mahasiswa extends CI_Controller
     }
   }
 
+  public function index_put()
+  {
+    $id = $this->put('id');
+    $data = [
+      'nrp' => $this->put('nrp'),
+      'nama' => $this->put('nama'),
+      'email' => $this->put('email'),
+      'jurusan' => $this->put('jurusan')
+    ];
+
+    if($this->Mahasiswa_model->updateMahasiswa($data, $id) > 0)
+    {
+      //data berhasil dibuat
+      $this->response([
+        'status' => TRUE,
+        'message' => 'data berhasiil diubah'
+    ], 201);
+    }else{
+             //data gagal ditambahkan
+             $this->response([
+              'status' => FALSE,
+              'message' => 'data gagal diubah'
+          ], 400);
+    }
+  }
+
 }
