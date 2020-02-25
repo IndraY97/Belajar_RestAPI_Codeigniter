@@ -81,7 +81,31 @@ class Mahasiswa extends CI_Controller
       ], 400);
       }
     }
+  }
 
+  public function index_post()
+  {
+    $data = [
+      'nrp' => $this->post('nrp'),
+      'nama' => $this->post('nama'),
+      'email' => $this->post('email'),
+      'jurusan' => $this->post('jurusan')
+    ];
+
+    if($this->Mahasiswa_model->createMahasiswa($data) > 0)
+    {
+      //data berhasil dibuat
+      $this->response([
+        'status' => TRUE,
+        'message' => 'data berhasiil ditambahkan'
+    ], 201);
+    }else{
+             //data gagal ditambahkan
+             $this->response([
+              'status' => FALSE,
+              'message' => 'data gagal ditambahkan'
+          ], 400);
+    }
   }
 
 }
