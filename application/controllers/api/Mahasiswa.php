@@ -19,6 +19,7 @@ class Mahasiswa extends CI_Controller
     $this->load->model('Mahasiswa_model');
   }
 
+  //fungsi untuk menampilkan data
   public function index_get()
   {
     
@@ -48,6 +49,37 @@ class Mahasiswa extends CI_Controller
         'status' => FALSE,
         'message' => 'id tidak di temukan'
     ], 404);
+    }
+
+  }
+
+  //fungsi untuk menghapus data
+  public function index_delete()
+  {
+    $id = $this->delete('id');
+
+    if($id === null)
+    {
+      //pesan bila user tidak input id
+      $this->response([
+        'status' => FALSE,
+        'message' => 'masukan id dengan benar'
+    ], 400);
+    }else{
+      //OK Data terhapus
+      if($this->Mahasiswa_model->deleteMahasiswa($id)>0){
+        $this->response([
+          'status' => TRUE,
+          'id' => $id,
+          'message' => 'data terhapus'
+      ], 200);
+      }else{
+        //hapus gagal karena id tidak ditemukan
+        $this->response([
+          'status' => FALSE,
+          'message' => 'penghapusan gagal id tidak ditemukan'
+      ], 400);
+      }
     }
 
   }
