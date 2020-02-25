@@ -21,9 +21,21 @@ class Mahasiswa extends CI_Controller
 
   public function index_get()
   {
-    $mahasiswa = $this->Mahasiswa_model->getMahasiswa();
+    
     //Cek tampilkan data
     //var_dump($mahasiswa);
+
+    //method get mahasiswa berdasarkan id
+    $id = $this->get('id');
+
+    if($id === null)
+    {
+      //bila id null maka tampilkan semua data
+      $mahasiswa = $this->Mahasiswa_model->getMahasiswa();
+    }else{
+      //bila id ada atau direquest maka tampilkan data berdasarkan id
+      $mahasiswa = $this->Mahasiswa_model->getMahasiswa($id);
+    }
 
     if ($mahasiswa) {
       $this->response([
