@@ -37,11 +37,17 @@ class Mahasiswa extends CI_Controller
       $mahasiswa = $this->Mahasiswa_model->getMahasiswa($id);
     }
 
+    //memberikan reponds bila data ditemukan dan tidak ditemukan
     if ($mahasiswa) {
       $this->response([
           'status' => TRUE,
           'data' => $mahasiswa
       ], 200);
+    }else{
+      $this->response([
+        'status' => FALSE,
+        'message' => 'id tidak di temukan'
+    ], 404);
     }
 
   }
